@@ -1,4 +1,5 @@
-import React from 'react'
+// * Styles
+import './AnswerOptions.scss';
 
 type Props = {
   answerOptions: string[]
@@ -8,10 +9,10 @@ type Props = {
 export default function AnswerOptions({answerOptions, correct} : Props) {
 
   return (
-    <li>
-      <div>{answerOptions[0]}</div>
-      <div>{answerOptions[1]}</div>
-      <div>{correct} is right</div>
+    <li className='answer-options'>
+      {answerOptions.map((option, index) => (
+        <div key={index + option}>{option}</div>
+      ))}
     </li>
   )
 }

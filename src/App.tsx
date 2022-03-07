@@ -17,7 +17,7 @@ function App() {
       answerOptions: [
         ['Cell Wall', 'Ribosomes'],
         ['Cytoplasm', 'Chloroplast'],
-        ['Partially permeable membrane', 'Impermeable membrane'],
+        ['Partially permeable membrane', 'Impermeable membrane', 'Lorem ipsum'],
         ['Cellulose', 'Mitochondria']
       ],
       correct: [2,2,1,1]
