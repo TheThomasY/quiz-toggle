@@ -1,1 +1,27 @@
+@import './styles/colors.scss';
 
+.App {
+  width: 90%;
+  margin-inline: auto;
+  color: #ffffff;
+  text-align: center;
+}
+
+.question {
+  margin-top: 1.6rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.answers-list {
+  text-align: center;
+
+  li {
+    border: 1px solid white;
+  }
+}
+
+.answers-status {
+  margin-top: 3.2rem;
+  font-size: 1.6rem;
+}
