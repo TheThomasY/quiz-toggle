@@ -6,30 +6,49 @@ import './AnswerOptions.scss';
 import colors from '../styles/_variables.module.scss';
 
 type Props = {
-  answerOptions: string[]
-  correct: number
-}
+  answerOptions: string[];
+  correct: number;
+  answerIsCorrect: () => void;
+  row: number;
+};
 
 type SelectedStyles = {
-    color: string;
-}
+  color: string;
+};
 
-export default function AnswerOptions({answerOptions, correct} : Props) {
+export default function AnswerOptions({
+  answerOptions,
+  correct,
+  answerIsCorrect,
+  row,
+}: Props) {
   // * Keep track of which answer is selected, index like array
   const [selected, setSelected] = useState<number>(0);
+  const [answeredCorrectly, setAnsweredCorrectly] = useState(
+    selected === correct
+  );
+
+  useEffect(() => {
+    if (selected === correct) {
+      setAnsweredCorrectly(true);
+      answerIsCorrect();
+    }
+  }, [selected]);
 
   const selectOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as Element;
-    setSelected(parseInt(target.id[0]));
-  }
+    if (!answeredCorrectly) {
+      setSelected(parseInt(target.id[0]));
+    }
+  };
 
-// * Get widths of list items to determine if they have wrapped
+  // * Get widths of list items to determine if they have wrapped
   const [listWidth, setListWidth] = useState<number>(0);
   const [answerWidth, setAnswerWidth] = useState<number>(0);
 
   const refUL = useRef<any>([]);
   const refAnswers = useRef<any>([]);
-  
+
   useEffect(() => {
     // ! Aggressively refreshes, should cap to reduce rerenders
     function handleResize() {
@@ -40,13 +59,13 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
       // ! Reconsider for >2 answers
     }
     // * Add event listener
-    window.addEventListener("resize", handleResize);
-    
+    window.addEventListener('resize', handleResize);
+
     // * Call handler right away so state gets updated with initial values
     handleResize();
-    
+
     // * Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // * Styling for bubble, needs to be able to travel left/right or up/down
@@ -54,33 +73,38 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
 
   useEffect(() => {
     if (listWidth <= answerWidth) {
-      setBubbleClass('selection-bubble-ud ' + (selected === 0 ? 'slide-up' : 'slide-down'))
+      setBubbleClass(
+        'selection-bubble-ud ' + (selected === 0 ? 'slide-up' : 'slide-down')
+      );
     } else {
-      setBubbleClass('selection-bubble-lr ' + (selected === 0 ? 'slide-left' : 'slide-right'))
+      setBubbleClass(
+        'selection-bubble-lr ' + (selected === 0 ? 'slide-left' : 'slide-right')
+      );
     }
-  }, [listWidth, answerWidth, selected])
+  }, [listWidth, answerWidth, selected]);
 
-    // TODO Make state when color theme changes, fine for now
-    let selectedBubble: SelectedStyles = {
-      color: colors['orangeSelectedText']
-    };
+  // TODO Make state when color theme changes, fine for now
+  let selectedBubble: SelectedStyles = {
+    color: colors['orangeSelectedText'],
+  };
 
   return (
     <li ref={refUL} className='answer-options'>
       <div className={bubbleClass}></div>
       {answerOptions.map((option, index) => (
         <div
-        ref={ref => {
-          refAnswers.current[index] = ref;
-        }}
-        id={index + option} 
-        onClick={selectOnClick}
-        className={'single-option'} style={(index === selected) ? selectedBubble : undefined} 
-        key={index + option}>{option}
+          ref={(ref) => {
+            refAnswers.current[index] = ref;
+          }}
+          id={index + option}
+          onClick={selectOnClick}
+          className={'single-option'}
+          style={index === selected ? selectedBubble : undefined}
+          key={index + option}
+        >
+          {option}
         </div>
       ))}
     </li>
-  )
+  );
 }
-
-
