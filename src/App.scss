@@ -1,7 +1,8 @@
-@import './styles/colors.module.scss';
+@import './styles/_variables.module.scss';
 
 .App {
   width: 90%;
+  max-width: 90rem;
   margin-inline: auto;
   color: #ffffff;
   text-align: center;
@@ -11,6 +12,7 @@
   margin-top: 1.6rem;
   font-size: 2rem;
   font-weight: 700;
+  line-height: 3.2rem;
 }
 
 .answers-list {
@@ -20,4 +22,17 @@
 .answers-status {
   margin-top: 3.2rem;
   font-size: 1.6rem;
+}
+
+@media (min-width: $lg) {
+  .question {
+    margin-top: 7rem;
+    font-size: 4rem;
+    line-height: 5.6rem;
+  }
+
+  .answers-status {
+    margin-top: 4rem;
+    font-size: 3.2rem;
+  }
 }
