@@ -1,0 +1,22 @@
+// * Backgrounds
+
+// * Orange
+$bgOrangeLight: #f6b868;
+$bgOrangeDark: #ee6c2d;
+$orangeBorder: #f8caa3;
+$orangeSelectedText: #9f938b;
+
+// * Pink
+$bg-pink-light: #f1b496;
+$bg-pink-dark: #ea816a;
+
+// * Blue
+$bg-blue-light: #76e0c2;
+$bg-blue-dark: #59cada;
+
+:export {
+  bgOrangeLight: $bgOrangeLight;
+  bgOrangeDark: $bgOrangeDark;
+  orangeBorder: $orangeBorder;
+  orangeSelectedText: $orangeSelectedText;
+}
