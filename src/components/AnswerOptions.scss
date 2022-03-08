@@ -8,6 +8,8 @@
 
   border: 2px solid #f8caa3;
   border-radius: 5rem;
+
+  position: relative;
 }
 
 .single-option {
@@ -20,4 +22,83 @@
   font-size: 1.8rem;
   font-weight: 700;
   cursor: pointer;
+  z-index: 100;
+}
+
+.selection-bubble-lr {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 5rem;
+  background-color: #f8caa3;
+  transition: all ease 0.5s;
+}
+
+.selection-bubble-ud {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  top: 0;
+  background-color: #f8caa3;
+  transition: border-radius ease 0.4s;
+}
+
+// * Animations for up, down, left, right
+// animation slide-right
+.slide-right {
+  animation: slide-right 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// animation slide-left
+.slide-left {
+  animation: slide-left 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+// animation slide-up
+.slide-up {
+  border-top-left-radius: 4.5rem;
+  border-top-right-radius: 4.5rem;
+  animation: slide-up 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+// animation slide-down
+.slide-down {
+  border-bottom-left-radius: 4.5rem;
+  border-bottom-right-radius: 4.5rem;
+  animation: slide-down 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+@keyframes slide-down {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }

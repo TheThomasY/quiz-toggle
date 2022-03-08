@@ -1,16 +1,20 @@
+// * React
+import { useEffect, useState, useRef } from 'react';
+
 // * Components
 import AnswerOptions from './components/AnswerOptions';
 
 // * Styles
 import './App.scss';
 
-function App() {
-  type QuestionAndAnswers = Readonly<{
-    question: string
-    answerOptions: string[][]
-    correct: number[]
-  }[]>;
+type QuestionAndAnswers = Readonly<{
+  question: string
+  answerOptions: string[][]
+  correct: number[]
+}[]>;
 
+
+function App() {
   const questions: QuestionAndAnswers = [
     {
       question: 'An animal cell contains:',
@@ -26,10 +30,12 @@ function App() {
 
   let questionNo: number = 0;
 
+
+
   return (
     <div className="App">
       <h1 className='question'>An animal cell contains:</h1>
-      <ul className="answers-list">
+      <ul  className="answers-list">
         {questions[questionNo]['answerOptions'].map((option, index) => (
         <AnswerOptions answerOptions={option} correct={questions[questionNo]['correct'][index]} key={index}/>
       ))}

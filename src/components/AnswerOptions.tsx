@@ -1,5 +1,5 @@
 // * React
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // * Styles
 import './AnswerOptions.scss';
@@ -12,7 +12,6 @@ type Props = {
 
 type SelectedStyles = {
     borderRadius: string;
-    backgroundColor: string;
     color: string;
 }
 
@@ -24,16 +23,47 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
     setSelected(parseInt(target.id[0]));
   }
 
+  // TODO Make state
   let selectedBubble: SelectedStyles = {
     borderRadius: '5rem',
-    backgroundColor: colors['orangeBorder'],
     color: colors['orangeSelectedText']
   };
 
+  const [bubbleClass, setBubbleClass] = useState<string>('')
+  
+
+
+// * Get widths of list items to determine if they have wrapped
+  const [listWidth, setListWidth] = useState<number>(0);
+  const [answerWidth, setAnswerWidth] = useState<number>(0);
+
+  const refUL = useRef<any>([]);
+  const refAnswers = useRef<any>([]);
+
+  useEffect(() => {
+    // * Get the width of the list container, minus 4 for 2px border
+    setListWidth(refUL.current.offsetWidth - 4);
+    setAnswerWidth(refAnswers.current[0].offsetWidth);
+    // console.log('li width:',  refUL.current.offsetWidth - 4);
+    // console.log('answer widths:',  refAnswers.current[0].offsetWidth);
+  }, [])
+
+  useEffect(() => {
+    if (listWidth === answerWidth) {
+      setBubbleClass('selection-bubble-ud ' + (selected === 0 ? 'slide-up' : 'slide-down'))
+    } else {
+      setBubbleClass('selection-bubble-lr ' + (selected === 0 ? 'slide-left' : 'slide-right'))
+    }
+  }, [listWidth, answerWidth, selected])
+
   return (
-    <li className='answer-options'>
+    <li ref={refUL} className='answer-options'>
+      <div className={bubbleClass}></div>
       {answerOptions.map((option, index) => (
         <div
+        ref={ref => {
+          refAnswers.current[index] = ref;
+        }}
         id={index + option} 
         onClick={selectOnClick}
         className={'single-option'} style={(index === selected) ? selectedBubble : undefined} 
