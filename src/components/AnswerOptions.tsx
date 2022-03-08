@@ -40,13 +40,25 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
   const refUL = useRef<any>([]);
   const refAnswers = useRef<any>([]);
 
-  useEffect(() => {
-    // * Get the width of the list container, minus 4 for 2px border
-    setListWidth(refUL.current.offsetWidth - 4);
-    setAnswerWidth(refAnswers.current[0].offsetWidth);
-    // console.log('li width:',  refUL.current.offsetWidth - 4);
-    // console.log('answer widths:',  refAnswers.current[0].offsetWidth);
-  }, [])
+  
+  useEffect(() => {  
+    function handleResize() {
+      // * Get the width of the list container, minus 4 for 2px border
+      setListWidth(refUL.current.offsetWidth - 4);
+      // * Get the width of the first answer
+      setAnswerWidth(refAnswers.current[0].offsetWidth);
+      // ! Reconsider for >2 answers
+    }
+    // * Add event listener
+    window.addEventListener("resize", handleResize);
+    
+    // * Call handler right away so state gets updated with initial values
+    handleResize();
+    
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   useEffect(() => {
     if (listWidth === answerWidth) {
@@ -73,3 +85,5 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
     </li>
   )
 }
+
+
