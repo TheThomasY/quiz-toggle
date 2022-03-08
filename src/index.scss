@@ -1,4 +1,4 @@
-@import 'styles/_colors.scss';
+@import 'styles/_colors.module.scss';
 
 body {
   margin: 0;
@@ -31,7 +31,7 @@ html {
 
 body {
   font-size: 1.6rem;
-  background-color: $bg-orange-dark;
+  background-color: $bgOrangeDark;
   font-family: 'Mulish', sans-serif;
 }
 
