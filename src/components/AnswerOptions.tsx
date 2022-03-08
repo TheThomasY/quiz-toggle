@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 // * Styles
 import './AnswerOptions.scss';
-import colors from '../styles/_colors.module.scss';
+import colors from '../styles/_variables.module.scss';
 
 type Props = {
   answerOptions: string[]
@@ -30,7 +30,8 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
   const refUL = useRef<any>([]);
   const refAnswers = useRef<any>([]);
   
-  useEffect(() => {  
+  useEffect(() => {
+    // ! Aggressively refreshes, should cap to reduce rerenders
     function handleResize() {
       // * Get the width of the list container, minus 4 for 2px border
       setListWidth(refUL.current.offsetWidth - 4);
@@ -52,7 +53,7 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
   const [bubbleClass, setBubbleClass] = useState<string>('');
 
   useEffect(() => {
-    if (listWidth === answerWidth) {
+    if (listWidth <= answerWidth) {
       setBubbleClass('selection-bubble-ud ' + (selected === 0 ? 'slide-up' : 'slide-down'))
     } else {
       setBubbleClass('selection-bubble-lr ' + (selected === 0 ? 'slide-left' : 'slide-right'))
