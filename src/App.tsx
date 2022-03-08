@@ -20,7 +20,7 @@ function App() {
         ['Partially membrane', 'Impermeable membrane lorem ipsum lorem ipsum'],
         ['Cellulose', 'Mitochondria']
       ],
-      correct: [2,2,1,1]
+      correct: [1,1,0,0]
     }
   ]
 
