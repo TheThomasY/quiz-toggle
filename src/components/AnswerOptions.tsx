@@ -11,27 +11,17 @@ type Props = {
 }
 
 type SelectedStyles = {
-    borderRadius: string;
     color: string;
 }
 
 export default function AnswerOptions({answerOptions, correct} : Props) {
-  const [selected, setSelected] = useState<number>(correct);
+  // * Keep track of which answer is selected, index like array
+  const [selected, setSelected] = useState<number>(0);
 
   const selectOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as Element;
     setSelected(parseInt(target.id[0]));
   }
-
-  // TODO Make state
-  let selectedBubble: SelectedStyles = {
-    borderRadius: '5rem',
-    color: colors['orangeSelectedText']
-  };
-
-  const [bubbleClass, setBubbleClass] = useState<string>('')
-  
-
 
 // * Get widths of list items to determine if they have wrapped
   const [listWidth, setListWidth] = useState<number>(0);
@@ -39,7 +29,6 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
 
   const refUL = useRef<any>([]);
   const refAnswers = useRef<any>([]);
-
   
   useEffect(() => {  
     function handleResize() {
@@ -55,10 +44,12 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
     // * Call handler right away so state gets updated with initial values
     handleResize();
     
-    // Remove event listener on cleanup
+    // * Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // * Styling for bubble, needs to be able to travel left/right or up/down
+  const [bubbleClass, setBubbleClass] = useState<string>('');
 
   useEffect(() => {
     if (listWidth === answerWidth) {
@@ -67,6 +58,11 @@ export default function AnswerOptions({answerOptions, correct} : Props) {
       setBubbleClass('selection-bubble-lr ' + (selected === 0 ? 'slide-left' : 'slide-right'))
     }
   }, [listWidth, answerWidth, selected])
+
+    // TODO Make state when color theme changes, fine for now
+    let selectedBubble: SelectedStyles = {
+      color: colors['orangeSelectedText']
+    };
 
   return (
     <li ref={refUL} className='answer-options'>
