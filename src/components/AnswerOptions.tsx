@@ -29,11 +29,15 @@ export default function AnswerOptions({
   const [answeredCorrectly, setAnsweredCorrectly] = useState(false);
 
   useEffect(() => {
+    setAnsweredCorrectly(false);
+  }, [answerOptions]);
+
+  useEffect(() => {
     if (selected === correct) {
       setAnsweredCorrectly(true);
       answerIsCorrect();
     }
-  }, [selected]);
+  }, [selected, answerOptions]);
 
   const selectOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as Element;
@@ -66,7 +70,7 @@ export default function AnswerOptions({
 
     // * Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [answerOptions]);
 
   // * Styling for bubble, needs to be able to travel left/right or up/down
   const [bubbleClass, setBubbleClass] = useState<string>('');
