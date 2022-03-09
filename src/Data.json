@@ -1,0 +1,53 @@
+[
+  {
+    "question": "An animal cell contains:",
+    "answerOptions": [
+      ["Cell Wall","Ribosomes"],
+      ["Cytoplasm", "Chloroplast"],
+      ["Partially membrane", "Impermeable membrane"],
+      ["Cellulose", "Mitochondria"]
+    ],
+    "correct": [1,0,0,1]
+  },
+  {
+    "question": "What are the states of matter?",
+    "answerOptions": [
+      ["Solid", "Magnets"],
+      ["Air", "Gas"],
+      ["Liquid", "Oil"]
+
+    ],
+    "correct": [0,1,0]
+  },
+  {
+    "question": "Which of the following are sources of renewable energy?",
+    "answerOptions": [
+      ["Oil", "Wind"],
+      ["Coal", "Solar"],
+      ["Nuclear", "Hydropower"],
+      ["Geothermal", "Natural Gas"]
+    ],
+    "correct": [1,1,1,0]
+  },
+  {
+    "question": "Which of the following elements are metals?",
+    "answerOptions": [
+      ["Iron", "Nitrogen"],
+      ["Copper", "Hydrogen"],
+      ["Oxygen", "Silver"],
+      ["Carbon", "Calcium"]
+    ],
+    "correct": [0,0,1,1]
+  },
+  {
+    "question": "Which of these countries are in Europe?",
+    "answerOptions": [
+      ["Bulgaria", "Turkey"],
+      ["Nepal", "Slovakia"],
+      ["Latvia", "Yemen"],
+      ["Jordan", "Estonia"],
+      ["Mongolia", "Liechtenstein"]
+    ],
+    "correct": [0,1,0,1,1]
+  }
+]
