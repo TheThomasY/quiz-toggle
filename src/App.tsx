@@ -38,19 +38,33 @@ const themeColors: string[] = [
 ];
 
 function App() {
-  // TODO change this when there is more than one question
-  let questionNo: number = 0;
-  let answersNo: number = questions[questionNo]['correct'].length;
-
+  // * STATE:
   const [totalCorrect, setTotalCorrect] = useState<number>(0);
-  const [colorTheme, setColorTheme] = useState<string>(themeColors[0]);
-
   // * Count number of correct answers, from 0 to answersNo ---------------
   const answerIsCorrect = () => {
     setTotalCorrect((prevTotalCorrect) => {
       return prevTotalCorrect + 1;
     });
   };
+
+  // * STATE:
+  const [colorTheme, setColorTheme] = useState<string>(themeColors[0]);
+
+  // TODO change this when there is more than one question
+  let questionNo: number = 0;
+
+  // * Correct answer locations - passed to answer children
+  let correctArr = questions[questionNo]['correct'];
+
+  // * Number of answers (rows)
+  let answersNo: number = correctArr.length;
+
+  // * Randomly pick starting selections. 50/50 chance to be correct
+  let initialSelected = correctArr.map((answer) =>
+    Math.random() < 0.5 ? 1 - answer : answer
+  );
+  let randomAnswer = Math.floor(Math.random() * (answersNo + 1));
+  initialSelected[randomAnswer] = 1 - correctArr[randomAnswer];
 
   // * Splitting the answers among the number of colours available ---------------
   const colorRange: number = themeColors.length - 1;
@@ -97,7 +111,8 @@ function App() {
           {questions[questionNo]['answerOptions'].map((option, index) => (
             <AnswerOptions
               answerOptions={option}
-              correct={questions[questionNo]['correct'][index]}
+              initialSelected={initialSelected[index]}
+              correct={correctArr[index]}
               answerIsCorrect={answerIsCorrect}
               colorTheme={colorTheme}
               key={index}

@@ -7,6 +7,7 @@ import colors from '../styles/_variables.module.scss';
 
 type Props = {
   answerOptions: string[];
+  initialSelected: number;
   correct: number;
   answerIsCorrect: () => void;
   colorTheme: string;
@@ -18,15 +19,14 @@ type InlineStyles = {
 
 export default function AnswerOptions({
   answerOptions,
+  initialSelected,
   correct,
   answerIsCorrect,
   colorTheme,
 }: Props) {
   // * Keep track of which answer is selected, index like array
-  const [selected, setSelected] = useState<number>(0);
-  const [answeredCorrectly, setAnsweredCorrectly] = useState(
-    selected === correct
-  );
+  const [selected, setSelected] = useState<number>(initialSelected);
+  const [answeredCorrectly, setAnsweredCorrectly] = useState(false);
 
   useEffect(() => {
     if (selected === correct) {
