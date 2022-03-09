@@ -1,5 +1,5 @@
 // * React
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 // * Components
 import AnswerOptions from './components/AnswerOptions';
@@ -123,9 +123,11 @@ function App() {
       ) : (
         <h2 className='answers-status'>The answer is correct!</h2>
       )}
-      <button className='question-btn' onClick={nextQuestion}>
-        Next Question
-      </button>
+      {totalCorrect === answersNo && (
+        <button className='question-btn' onClick={nextQuestion}>
+          Next Question
+        </button>
+      )}
     </div>
   );
 }
