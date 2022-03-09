@@ -6,23 +6,69 @@ $xl: '1280px';
 
 // * Backgrounds
 
-// * Orange
-$bgOrangeLight: #f6b868;
-$bgOrangeDark: #ee6c2d;
-$orangeBorder: #f8caa3;
-$orangeSelectedText: #9f938b;
+// * Dark Orange
+$darkOrangeBgLight: #f6b868;
+$darkOrangeBgDark: #ee6c2d;
+$darkOrangeBubbleBG: #f8caa3;
+$darkOrangeBorder: #f8caa3;
+$darkOrangeSelectedText: #9f938b;
 
-// * Pink
-$bg-pink-light: #f1b496;
-$bg-pink-dark: #ea816a;
+// * Orange
+$orangeBgLight: #ffc446;
+$orangeBgDark: #ff8f07;
+$orangeBubbleBG: #ffd99a;
+$orangeBorder: #ffedb9;
+$orangeSelectedText: #8e7c62;
+
+// * Yellow
+$yellowBgLight: #fee34c;
+$yellowBgDark: #d59100;
+$yellowBubbleBG: #fbec9f;
+$yellowBorder: #fbfbfb;
+$yellowSelectedText: #9f938b;
 
 // * Blue
-$bg-blue-light: #76e0c2;
-$bg-blue-dark: #59cada;
+$blueBgLight: #76e0c2;
+$blueBgDark: #59cada;
+$blueBubbleBG: #a5e7e2;
+$blueBorder: #fbfbfb;
+$blueSelectedText: #4cad94;
+
+// * Green - correct answer
+$greenBgLight: #51daa8;
+$greenBgDark: #00a274;
+$greenBubbleBG: #d9eddf;
+$greenBorder: #fbfbfb;
+$greenSelectedText: #00a274;
 
 :export {
-  bgOrangeLight: $bgOrangeLight;
-  bgOrangeDark: $bgOrangeDark;
+  darkOrangeBgLight: $darkOrangeBgLight;
+  darkOrangeBgDark: $darkOrangeBgDark;
+  darkOrangeBubbleBG: $darkOrangeBubbleBG;
+  darkOrangeBorder: $darkOrangeBorder;
+  darkOrangeSelectedText: $darkOrangeSelectedText;
+
+  orangeBgLight: $orangeBgLight;
+  orangeBgDark: $orangeBgDark;
+  orangeBubbleBG: $orangeBubbleBG;
   orangeBorder: $orangeBorder;
   orangeSelectedText: $orangeSelectedText;
+
+  yellowBgLight: $yellowBgLight;
+  yellowBgDark: $yellowBgDark;
+  yellowBubbleBG: $yellowBubbleBG;
+  yellowBorder: $yellowBorder;
+  yellowSelectedText: $yellowSelectedText;
+
+  blueBgLight: $blueBgLight;
+  blueBgDark: $blueBgDark;
+  blueBubbleBG: $blueBubbleBG;
+  blueBorder: $blueBorder;
+  blueSelectedText: $blueSelectedText;
+
+  greenBgLight: $greenBgLight;
+  greenBgDark: $greenBgDark;
+  greenBubbleBG: $greenBubbleBG;
+  greenBorder: $greenBorder;
+  greenSelectedText: $greenSelectedText;
 }

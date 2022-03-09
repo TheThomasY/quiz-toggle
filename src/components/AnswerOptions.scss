@@ -31,8 +31,7 @@
   left: 0;
   top: -1%;
   border-radius: 50px;
-  background-color: #f8caa3;
-  transition: all ease 0.5s;
+  background-color: transparent;
 }
 
 .selection-bubble-ud {
@@ -41,8 +40,7 @@
   height: 51%;
   left: -0.5%;
   top: -0.5%;
-  background-color: #f8caa3;
-  transition: border-radius ease 0.4s;
+  background-color: transparent;
 }
 
 @media (min-width: $lg) {

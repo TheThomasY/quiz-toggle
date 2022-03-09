@@ -26,13 +26,15 @@ code {
 }
 
 html {
+  min-height: 100vh;
   font-size: 62.5%;
 }
 
 body {
   font-size: 1.6rem;
-  background-color: $bgOrangeDark;
   font-family: 'Mulish', sans-serif;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 ul {

@@ -9,18 +9,18 @@ type Props = {
   answerOptions: string[];
   correct: number;
   answerIsCorrect: () => void;
-  row: number;
+  colorTheme: string;
 };
 
-type SelectedStyles = {
-  color: string;
+type InlineStyles = {
+  [index: string]: string;
 };
 
 export default function AnswerOptions({
   answerOptions,
   correct,
   answerIsCorrect,
-  row,
+  colorTheme,
 }: Props) {
   // * Keep track of which answer is selected, index like array
   const [selected, setSelected] = useState<number>(0);
@@ -84,13 +84,22 @@ export default function AnswerOptions({
   }, [listWidth, answerWidth, selected]);
 
   // TODO Make state when color theme changes, fine for now
-  let selectedBubble: SelectedStyles = {
-    color: colors['orangeSelectedText'],
+
+  let answerStyle: InlineStyles = {
+    border: '2px solid ' + colors[colorTheme + 'Border'],
+  };
+
+  let bubbleStyle: InlineStyles = {
+    backgroundColor: colors[colorTheme + 'BubbleBG'],
+  };
+
+  let textStyle: InlineStyles = {
+    color: colors[colorTheme + 'SelectedText'],
   };
 
   return (
-    <li ref={refUL} className='answer-options'>
-      <div className={bubbleClass}></div>
+    <li ref={refUL} className='answer-options' style={answerStyle}>
+      <div className={bubbleClass} style={bubbleStyle}></div>
       {answerOptions.map((option, index) => (
         <div
           ref={(ref) => {
@@ -99,7 +108,7 @@ export default function AnswerOptions({
           id={index + option}
           onClick={selectOnClick}
           className={'single-option'}
-          style={index === selected ? selectedBubble : undefined}
+          style={index === selected ? textStyle : undefined}
           key={index + option}
         >
           {option}
