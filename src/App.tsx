@@ -30,7 +30,7 @@ const questions: QuestionAndAnswers = [
 ];
 
 const themeColors: string[] = [
-  'darkorange',
+  'darkOrange',
   'orange',
   'yellow',
   'blue',
@@ -56,8 +56,8 @@ function App() {
   }, [totalCorrect]);
 
   useEffect(() => {
-    let bgColorLight = colors[colorTheme + 'BgLight'];
-    let bgColorDark = colors[colorTheme + 'BgDark'];
+    let bgColorLight: string = colors[colorTheme + 'BgLight'];
+    let bgColorDark: string = colors[colorTheme + 'BgDark'];
     let style = `linear-gradient(${bgColorLight}, ${bgColorDark})`;
     document.body.style.backgroundImage = style;
   }, [colorTheme]);
@@ -72,6 +72,7 @@ function App() {
               answerOptions={option}
               correct={questions[questionNo]['correct'][index]}
               answerIsCorrect={answerIsCorrect}
+              colorTheme={colorTheme}
               key={index}
             />
           ))}
