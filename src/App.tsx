@@ -50,7 +50,6 @@ function App() {
             answerOptions={option}
             correct={questions[questionNo]['correct'][index]}
             answerIsCorrect={answerIsCorrect}
-            row={index}
             key={index}
           />
         ))}

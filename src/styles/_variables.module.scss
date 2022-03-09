@@ -7,22 +7,47 @@ $xl: '1280px';
 // * Backgrounds
 
 // * Orange
-$bgOrangeLight: #f6b868;
-$bgOrangeDark: #ee6c2d;
+$orangeBgLight: #f6b868;
+$orangeBgDark: #ee6c2d;
 $orangeBorder: #f8caa3;
 $orangeSelectedText: #9f938b;
 
-// * Pink
-$bg-pink-light: #f1b496;
-$bg-pink-dark: #ea816a;
+// * Yellow
+$yellowBgLight: #fee34c;
+$yellowBgDark: #d59100;
+$yellowBorder: #fbfbfb;
+$yellowSelectedText: #9f938b;
 
 // * Blue
-$bg-blue-light: #76e0c2;
-$bg-blue-dark: #59cada;
+$blueBgLight: #76e0c2;
+$blueBgDark: #59cada;
+$blueBorder: #fbfbfb;
+$blueSelectedText: #4cad94;
+
+// * Green - correct answer
+$greenBgLight: #51daa8;
+$greenBgDark: #00a274;
+$greenBorder: #fbfbfb;
+$greenSelectedText: #00a274;
 
 :export {
-  bgOrangeLight: $bgOrangeLight;
-  bgOrangeDark: $bgOrangeDark;
+  orangeBgLight: $orangeBgLight;
+  orangeBgDark: $orangeBgDark;
   orangeBorder: $orangeBorder;
   orangeSelectedText: $orangeSelectedText;
+
+  yellowBgLight: $yellowBgLight;
+  yellowBgDark: $yellowBgDark;
+  yellowBorder: $yellowBorder;
+  yellowSelectedText: $yellowSelectedText;
+
+  blueBgLight: $blueBgLight;
+  blueBgDark: $blueBgDark;
+  blueBorder: $blueBorder;
+  blueSelectedText: $blueSelectedText;
+
+  greenBgLight: $greenBgLight;
+  greenBgDark: $greenBgDark;
+  greenBorder: $greenBorder;
+  greenSelectedText: $greenSelectedText;
 }

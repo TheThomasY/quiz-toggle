@@ -9,7 +9,6 @@ type Props = {
   answerOptions: string[];
   correct: number;
   answerIsCorrect: () => void;
-  row: number;
 };
 
 type SelectedStyles = {
@@ -20,7 +19,6 @@ export default function AnswerOptions({
   answerOptions,
   correct,
   answerIsCorrect,
-  row,
 }: Props) {
   // * Keep track of which answer is selected, index like array
   const [selected, setSelected] = useState<number>(0);
