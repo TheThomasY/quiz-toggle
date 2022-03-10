@@ -24,14 +24,20 @@ export default function AnswerOptions({
   answerIsCorrect,
   colorTheme,
 }: Props) {
+  // * -------------------------------------------------------------------------------------
+  // * Selections and clicks
+  // * -------------------------------------------------------------------------------------
+  // * STATE:
   // * Keep track of which answer is selected, index like array
   const [selected, setSelected] = useState<number>(initialSelected);
-  const [answeredCorrectly, setAnsweredCorrectly] = useState(false);
 
+  // * STATE:
+  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean>(false);
   useEffect(() => {
     setAnsweredCorrectly(false);
   }, [answerOptions]);
 
+  // * Handle correct answer, check if selection or question changes
   useEffect(() => {
     if (selected === correct) {
       setAnsweredCorrectly(true);
@@ -39,6 +45,7 @@ export default function AnswerOptions({
     }
   }, [selected, answerOptions]);
 
+  // * Handle click, only works if current answer is wrong
   const selectOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as Element;
     if (!answeredCorrectly) {
@@ -46,13 +53,19 @@ export default function AnswerOptions({
     }
   };
 
-  // * Get widths of list items to determine if they have wrapped
+  // * -------------------------------------------------------------------------------------
+  // * Bubble Animation and Styles
+  // * -------------------------------------------------------------------------------------
+
+  // * State:
+  // * Get widths of list and items to determine if they have wrapped
   const [listWidth, setListWidth] = useState<number>(0);
   const [answerWidth, setAnswerWidth] = useState<number>(0);
 
   const refUL = useRef<any>([]);
   const refAnswers = useRef<any>([]);
 
+  // * At screen resize or question change: calculate widths to apply correct styles
   useEffect(() => {
     // ! Aggressively refreshes, should cap to reduce rerenders
     function handleResize() {
@@ -60,14 +73,13 @@ export default function AnswerOptions({
       setListWidth(refUL.current.offsetWidth - 4);
       // * Get the width of the first answer
       setAnswerWidth(refAnswers.current[0].offsetWidth);
-      // ! Reconsider for >2 answers
+      // ! Reconsider for >2 answers.
+      // TODO: Given how many answer options, generate properties of bubble
     }
     // * Add event listener
     window.addEventListener('resize', handleResize);
-
     // * Call handler right away so state gets updated with initial values
     handleResize();
-
     // * Remove event listener on cleanup
     return () => window.removeEventListener('resize', handleResize);
   }, [answerOptions]);
@@ -86,8 +98,6 @@ export default function AnswerOptions({
       );
     }
   }, [listWidth, answerWidth, selected]);
-
-  // TODO Make state when color theme changes, fine for now
 
   let answerStyle: InlineStyles = {
     border: '2px solid ' + colors[colorTheme + 'Border'],

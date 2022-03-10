@@ -1,6 +1,5 @@
 <h1 align="center">Quiz Toggle</h1>
 
-
 ## Links 🌟
 
 - Live site: [Try it out here 💻]('Live View')
@@ -23,7 +22,7 @@
 
 ## Changelog
 
-- **[0.9.0] 07/03/22 Project Creation**: 
+- **[0.9.0] 07/03/22 Project Creation**:
 
 ## Author 🧑
 

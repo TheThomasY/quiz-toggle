@@ -32,19 +32,23 @@ const themeColors: string[] = [
 function App() {
   // * STATE:
   const [totalCorrect, setTotalCorrect] = useState<number>(0);
-  // * Count number of correct answers, from 0 to answersNo ---------------
+  // * Count number of correct answers, from 0 to answersNo
   const answerIsCorrect = () => {
     setTotalCorrect((prevTotalCorrect) => {
       return prevTotalCorrect + 1;
     });
   };
-
   // * STATE:
   const [colorTheme, setColorTheme] = useState<string>(themeColors[0]);
+
+  // * -------------------------------------------------------------------------------------
+  // * Current Question
+  // * -------------------------------------------------------------------------------------
 
   // * STATE:
   const [questionNo, setQuestionNo] = useState(0);
 
+  // * Move to next question, only possible when answered correctly
   const nextQuestion = () => {
     setTotalCorrect(0);
     setQuestionNo((prevQuestionNo) => {
@@ -52,21 +56,31 @@ function App() {
     });
   };
 
+  // * -------------------------------------------------------------------------------------
+  // * Correct Answers and initial random selections
+  // * -------------------------------------------------------------------------------------
+
   // * Correct answer locations - passed to answer children
   let correctArr = Questions[questionNo]['correct'];
 
   // * Number of answers (rows)
   let answersNo: number = correctArr.length;
 
+  // ! This only works when the page first loads - need new approach for every time
   // * Randomly pick starting selections. 50/50 chance to be correct
   let initialSelected = correctArr.map((answer) =>
     Math.random() < 0.5 ? 1 - answer : answer
   );
+
   // * One random answer is ALWAYS in wrong position
   let randomAnswer = Math.floor(Math.random() * (answersNo + 1));
   initialSelected[randomAnswer] = 1 - correctArr[randomAnswer];
 
-  // * Splitting the answers among the number of colours available ---------------
+  // * -------------------------------------------------------------------------------------
+  // * Variables colours controlled by number of correct guesses
+  // * -------------------------------------------------------------------------------------
+
+  // * Splitting the answers among the number of colours available
   const colorRange: number = themeColors.length - 1;
   let colorStart: number = 0;
   let split: number = Math.floor(answersNo / colorRange);
