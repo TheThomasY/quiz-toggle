@@ -1,8 +1,15 @@
 <h1 align="center">Quiz Toggle</h1>
 
-## Links 🌟
+## Features
 
-- Live site: [Try it out here 💻]('Live View')
+- Responsive down to 320px
+-
+- Type checking through Typescript
+-
+
+## Limitations/Issues
+
+-
 
 ## Screenshots 📷
 

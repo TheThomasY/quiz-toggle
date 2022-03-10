@@ -33,11 +33,18 @@ function App() {
   // * STATE:
   const [totalCorrect, setTotalCorrect] = useState<number>(0);
   // * Count number of correct answers, from 0 to answersNo
-  const answerIsCorrect = () => {
-    setTotalCorrect((prevTotalCorrect) => {
-      return prevTotalCorrect + 1;
-    });
+  const totalCorrectUpdater = (correct: boolean) => {
+    if (correct) {
+      setTotalCorrect((prevTotalCorrect) => {
+        return prevTotalCorrect + 1;
+      });
+    } else {
+      setTotalCorrect((prevTotalCorrect) => {
+        return prevTotalCorrect - 1;
+      });
+    }
   };
+
   // * STATE:
   const [colorTheme, setColorTheme] = useState<string>(themeColors[0]);
 
@@ -50,6 +57,7 @@ function App() {
 
   // * Move to next question, only possible when answered correctly
   const nextQuestion = () => {
+    // * Set total to zero. New question will load and then children will re-update if they are now correct
     setTotalCorrect(0);
     setQuestionNo((prevQuestionNo) => {
       return prevQuestionNo < Questions.length - 1 ? prevQuestionNo + 1 : 0;
@@ -126,7 +134,8 @@ function App() {
             answerOptions={option}
             initialSelected={initialSelected[index]}
             correct={correctArr[index]}
-            answerIsCorrect={answerIsCorrect}
+            allCorrect={totalCorrect === answersNo}
+            totalCorrectUpdater={totalCorrectUpdater}
             colorTheme={colorTheme}
             key={index}
           />

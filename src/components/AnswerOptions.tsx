@@ -9,7 +9,8 @@ type Props = {
   answerOptions: string[];
   initialSelected: number;
   correct: number;
-  answerIsCorrect: () => void;
+  allCorrect: boolean;
+  totalCorrectUpdater: (correct: boolean) => void;
   colorTheme: string;
 };
 
@@ -17,11 +18,20 @@ type InlineStyles = {
   [index: string]: string;
 };
 
+const useIsMount = () => {
+  const isMountRef = useRef(true);
+  useEffect(() => {
+    isMountRef.current = false;
+  }, []);
+  return isMountRef.current;
+};
+
 export default function AnswerOptions({
   answerOptions,
   initialSelected,
   correct,
-  answerIsCorrect,
+  allCorrect,
+  totalCorrectUpdater,
   colorTheme,
 }: Props) {
   // * -------------------------------------------------------------------------------------
@@ -31,25 +41,32 @@ export default function AnswerOptions({
   // * Keep track of which answer is selected, index like array
   const [selected, setSelected] = useState<number>(initialSelected);
 
-  // * STATE:
-  const [answeredCorrectly, setAnsweredCorrectly] = useState<boolean>(false);
-  useEffect(() => {
-    setAnsweredCorrectly(false);
-  }, [answerOptions]);
-
-  // * Handle correct answer, check if selection or question changes
+  // * If answer is correct, tell App to +1 to total
   useEffect(() => {
     if (selected === correct) {
-      setAnsweredCorrectly(true);
-      answerIsCorrect();
+      totalCorrectUpdater(selected === correct);
     }
-  }, [selected, answerOptions]);
+  }, [selected]);
 
-  // * Handle click, only works if current answer is wrong
+  // * After the questions change (but not on mount), tell App about correct guesses
+  const isMount = useIsMount();
+  useEffect(() => {
+    if (!isMount) {
+      if (selected === correct) {
+        totalCorrectUpdater(selected === correct);
+      }
+    }
+  }, [answerOptions]);
+
+  // * Handle click, only works if not fully correct
   const selectOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as Element;
-    if (!answeredCorrectly) {
+    if (!allCorrect) {
       setSelected(parseInt(target.id[0]));
+      if (parseInt(target.id[0]) !== correct) {
+        // * If the selection is wrong tell App to -1 to total. We only want to do this in the case that the guess was correct but the user clicked off it
+        totalCorrectUpdater(false);
+      }
     }
   };
 
